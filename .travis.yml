@@ -1,0 +1,9 @@
+language: perl
+
+perl:
+ - "5.22"
+
+script: 
+ - . t/test1.sh
+ - . t/test2.sh
+
