@@ -3,6 +3,8 @@ language: perl
 perl:
  - "5.22"
 
+install: true
+
 script: 
  - . t/test1.sh
  - . t/test2.sh
