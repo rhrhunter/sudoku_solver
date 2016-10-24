@@ -8,4 +8,5 @@ install: true
 script: 
  - . t/test1.sh
  - . t/test2.sh
+ - . t/test3.sh
 
