@@ -9,8 +9,8 @@ To run the sudoker solver, do:
 perl sudoku.pl <GAME>
 ```
 
-Where '''<GAME>''' is a game package like: '''game::easy1''', or '''game::bad'''.
+Where \<GAME\> is a game package like: 'game::easy1', or 'game::bad'.
 
-To create a sudoku board, see the '''game''' folder for examples on how to do it.
+To create a sudoku board, see the 'game' folder for examples on how to do it.
 
 -Rob
