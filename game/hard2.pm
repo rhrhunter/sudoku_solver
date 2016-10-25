@@ -9,123 +9,122 @@ use parent qw(game);
 
 sub define_board {
     my $self = shift;
-    my $id = 0;
 
     # block 1
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 3, id => $id++), # 3
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(3), # 3
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
     ]));
 
     # block 2
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => 1, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 8, id => $id++),
-        new sbox(value => 6, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 7, id => $id++),
+        new sbox(1),
+        new sbox(),
+        new sbox(),
+        new sbox(8),
+        new sbox(6),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(7),
         ]));
 
     # block 3
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => 4, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 5, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 1, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
+        new sbox(4),
+        new sbox(),
+        new sbox(),
+        new sbox(5),
+        new sbox(),
+        new sbox(1),
+        new sbox(),
+        new sbox(),
+        new sbox(),
         ]));
 
     # block 4
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => 4, id => $id++),
-        new sbox(value => 8, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 2, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 9, id => $id++),
+        new sbox(4),
+        new sbox(8),
+        new sbox(),
+        new sbox(),
+        new sbox(2),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(9),
         ]));
 
     # block 5
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 7, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(7),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
         ]));
 
     # block 6
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => 9, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 6, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 2, id => $id++),
-        new sbox(value => 4, id => $id++),
+        new sbox(9),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(6),
+        new sbox(),
+        new sbox(),
+        new sbox(2),
+        new sbox(4),
         ]));
 
     # block 7
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 1, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 6, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 7, id => $id++),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(1),
+        new sbox(),
+        new sbox(6),
+        new sbox(),
+        new sbox(),
+        new sbox(7),
         ]));
 
     # block 8
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => 2, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 3, id => $id++),
-        new sbox(value => 5, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 9, id => $id++),
+        new sbox(2),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(3),
+        new sbox(5),
+        new sbox(),
+        new sbox(),
+        new sbox(9),
         ]));
 
     # block 9
     push(@{$self->{blocks}}, new sblock(boxes => [
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => 9, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
-        new sbox(value => undef, id => $id++),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(),
+        new sbox(9),
+        new sbox(),
+        new sbox(),
+        new sbox(),
         ]));
 }
 

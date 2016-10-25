@@ -2,12 +2,14 @@ package sbox;
 
 use Data::Dumper;
 
+our $Id = 0;
+
 sub new {
-    my ($class, %args) = @_;
+    my ($class, $value) = @_;
     my $self = {};
     bless($self, $class);
-    $self->{value} = delete($args{value});
-    $self->{id} = delete($args{id});
+    $self->set($value);
+    $self->{id} = $Id++;
     return $self;
 }
 
