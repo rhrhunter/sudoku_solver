@@ -28,8 +28,11 @@ sub define_board {
 
 sub build_board {
     my $self = shift;
-    # build blocks
-    # build verticals
+    
+    # first define the board
+    $self->define_board();
+
+    # create all the columns
     my $modifier = 0;
     foreach my $vert (0..8) {
         my $row_adjust;
@@ -65,7 +68,7 @@ sub build_board {
         push(@{$self->{verts}}, $vert_obj);
     }
     
-    # build horizontals
+    # create all the rows
     $modifier = 0;
     foreach my $horz (0..8) {
         my $block_adjust;

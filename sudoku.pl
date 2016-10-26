@@ -14,7 +14,6 @@ sub main {
     $mod =~ s/::/\//g;
     require $mod . ".pm";
     my $game = $GAME->new(draw => $draw);
-    $game->define_board();
     $game->build_board();
     $game->find_solution();
 }
