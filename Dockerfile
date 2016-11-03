@@ -12,7 +12,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y pkg-config
 
 # Cleanup
-# RUN apt-get purge
+RUN apt-get purge
 
 # Create a directory
 RUN mkdir -p /sudoku
