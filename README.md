@@ -23,4 +23,4 @@ docker run -it --rm -v /path/to/sudoku_solver_clone/:/sudoku sudoku_solver perl 
 
 To create a sudoku board, see the 'game' folder for examples on how to do it.
 
--Rob
+Enjoy.
