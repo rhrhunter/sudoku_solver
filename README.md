@@ -9,8 +9,8 @@ To run the sudoker solver, do:
 perl sudoku.pl <GAME> <REDRAW>
 ```
 
-*\<GAME\> - a game package like: 'game::easy1', or 'game::bad'
-*\<REDRAW\> - if set to '1', will display the algorithm solving the puzzle in real time.
+- \<GAME\> - a game package like: 'game::easy1', or 'game::bad'
+- \<REDRAW\> - if set to '1', will display the algorithm solving the puzzle in real time.
 
 To run inside the embedded docker container, do:
 
