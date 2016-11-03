@@ -11,7 +11,7 @@ sub define_board {
     my $self = shift;
 
     # block 1
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(3),
         new sbox(),
@@ -24,7 +24,7 @@ sub define_board {
         ]));
 
     # block 2
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(2),
         new sbox(),
@@ -37,7 +37,7 @@ sub define_board {
         ]));
 
     # block 3
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(8),
         new sbox(),
         new sbox(),
@@ -50,7 +50,7 @@ sub define_board {
         ]));
 
     # block 4
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(),
         new sbox(1),
@@ -63,7 +63,7 @@ sub define_board {
         ]));
 
     # block 5
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(3),
         new sbox(5),
         new sbox(),
@@ -76,7 +76,7 @@ sub define_board {
         ]));
 
     # block 6
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(),
         new sbox(),
@@ -89,7 +89,7 @@ sub define_board {
         ]));
 
     # block 7
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(8),
         new sbox(9),
@@ -102,7 +102,7 @@ sub define_board {
         ]));
 
     # block 8
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(),
         new sbox(),
         new sbox(),
@@ -115,7 +115,7 @@ sub define_board {
         ]));
 
     # block 9
-    push(@{$self->{blocks}}, new sblock(boxes => [
+    push(@{$self->blocks()}, new sblock(boxes => [
         new sbox(2),
         new sbox(3),
         new sbox(),

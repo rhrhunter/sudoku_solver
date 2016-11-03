@@ -1,5 +1,10 @@
+use strict;
+use warnings;
+
 package sblock;
 
-use parent qw(sobj);
+use Moo;
+
+extends 'sobj';
 
 1;

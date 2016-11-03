@@ -2,24 +2,39 @@ use strict;
 use warnings;
 use Data::Dumper;
 
+package game;
+
+use Moo;
+
 use sbox;
 use sblock;
 use shoriz;
 use svert;
 
-package game;
+has blocks => (
+    default => sub { [] },
+    is => "rw"
+);
 
-sub new {
-    my ($class, %args) = @_;
-    my $self = \%args;
-    bless($self,$class);    
-    $self->{blocks} = [];
-    $self->{verts} = [];
-    $self->{horiz} = [];
-    $self->{solutions} = 0;
-    $self->{draw} //= 1;
-    return $self;
-}
+has verts => (
+    default => sub { [] },
+    is => "rw"
+);
+
+has horiz => (
+    default => sub { [] },
+    is => "rw"
+);
+
+has solutions => (
+    default => 0,
+    is => "rw"
+);
+
+has draw => (
+    default => 1,
+    is => "rw"
+);
 
 sub define_board {
     my $self = shift;

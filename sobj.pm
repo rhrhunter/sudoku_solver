@@ -1,18 +1,23 @@
+use strict;
+use warnings;
+
 package sobj;
 
-sub new {
-    my ($class, %args) = @_;
-    my $self = {};
-    bless($self, $class);
-    $self->{boxes} = delete($args{boxes});
-    
-    # add ourselves to each boxes owner list
-    foreach (@{$self->{boxes}}) {
-        $_->add_owner($self);
-    }
-    
-    return $self;
-}
+use Moo;
+
+has 'boxes' => (
+    default => sub { [] },
+    is => 'ro',
+    trigger => sub {
+        my $self = shift;
+        my $boxes = shift;
+
+        # add ourselves to each boxes' owner list
+        foreach (@{$self->{boxes}}) {
+            $_->add_owner($self);
+        }
+    }        
+);
 
 sub get_valid_values {
     my ($self) = @_;
@@ -36,7 +41,7 @@ sub get_valid_values {
 sub _build_hash {
     my ($self) = @_;
     my %hash = ();
-    foreach my $box (@{$self->{boxes}}) {
+    foreach my $box (@{$self->boxes()}) {
         if ($box->get()) {
             $hash{$box->get()}++;
         }
@@ -64,7 +69,7 @@ sub is_valid {
 
 sub get_box {
     my ($self, $num) = @_;
-    return $self->{boxes}->[$num];
+    return $self->boxes()->[$num];
 }
 
 sub is_complete {
