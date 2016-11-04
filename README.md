@@ -13,7 +13,7 @@ perl /path/to/sudoku_solver_clone/sudoku.pl <GAME> <REDRAW>
 - \<GAME\> - a game package like: 'game::easy1', or 'game::bad'
 - \<REDRAW\> - if set to '1', will display the algorithm solving the puzzle in real time.
 
-To run inside the embedded docker container, do:
+To run inside a docker container, build the docker container defined by 'Dockerfile' and run it like so:
 
 ```bash
 cd /path/to/sudoku_solver_clone
