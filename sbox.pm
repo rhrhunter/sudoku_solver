@@ -1,6 +1,7 @@
-package sbox;
+use strict;
+use warnings;
 
-use Data::Dumper;
+package sbox;
 
 our $Id = 0;
 

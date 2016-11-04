@@ -13,7 +13,7 @@ has 'boxes' => (
         my $boxes = shift;
 
         # add ourselves to each boxes' owner list
-        foreach (@{$self->{boxes}}) {
+        foreach (@{$boxes}) {
             $_->add_owner($self);
         }
     }        
@@ -50,18 +50,21 @@ sub _build_hash {
 }
 
 sub is_valid {
-    my ($self) = @_;
+    my ($self, $h) = @_;
 
-    my %hash = %{$self->_build_hash()};
+    my %hash;
+    if ($h) {
+        %hash = %{$h};
+    } else {
+        %hash = %{$self->_build_hash()};
+    }
+
     my $sum = 0;
     foreach (values %hash) {
         if ($_ > 1) {
             return 0;
         }
         $sum += $_;
-    }
-    if ($sum > (1+2+3+4+5+6+7+8+9)) {
-        return 0;
     }
 
     return 1;
@@ -82,7 +85,7 @@ sub is_complete {
     if (scalar(keys %hash) != 9) {
         return 0;
     } else {
-        return $self->is_valid();
+        return $self->is_valid(\%hash);
     }
 }
 

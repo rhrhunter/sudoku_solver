@@ -70,17 +70,17 @@ sub build_board {
         my $block2 = ($modifier % 3) + 3;     
         my $block3 = ($modifier % 3) + 6;
         
-        my $vert_obj = new svert(boxes => [$self->{blocks}->[$block1]->get_box($row1),
-                                           $self->{blocks}->[$block1]->get_box($row2),
-                                           $self->{blocks}->[$block1]->get_box($row3),
-                                           $self->{blocks}->[$block2]->get_box($row1),
-                                           $self->{blocks}->[$block2]->get_box($row2),
-                                           $self->{blocks}->[$block2]->get_box($row3),
-                                           $self->{blocks}->[$block3]->get_box($row1),
-                                           $self->{blocks}->[$block3]->get_box($row2),
-                                           $self->{blocks}->[$block3]->get_box($row3)]);
+        my $vert_obj = new svert(boxes => [$self->blocks()->[$block1]->get_box($row1),
+                                           $self->blocks()->[$block1]->get_box($row2),
+                                           $self->blocks()->[$block1]->get_box($row3),
+                                           $self->blocks()->[$block2]->get_box($row1),
+                                           $self->blocks()->[$block2]->get_box($row2),
+                                           $self->blocks()->[$block2]->get_box($row3),
+                                           $self->blocks()->[$block3]->get_box($row1),
+                                           $self->blocks()->[$block3]->get_box($row2),
+                                           $self->blocks()->[$block3]->get_box($row3)]);
         
-        push(@{$self->{verts}}, $vert_obj);
+        push(@{$self->verts()}, $vert_obj);
     }
     
     # create all the rows
@@ -119,24 +119,24 @@ sub build_board {
         my $block2 = $modifier + $block_adjust + 1; 
         my $block3 = $modifier + $block_adjust + 2;
         
-        my $horiz_obj = new shoriz(boxes => [$self->{blocks}->[$block1]->get_box($col1),
-                                             $self->{blocks}->[$block1]->get_box($col2),
-                                             $self->{blocks}->[$block1]->get_box($col3),
-                                             $self->{blocks}->[$block2]->get_box($col1),
-                                             $self->{blocks}->[$block2]->get_box($col2),
-                                             $self->{blocks}->[$block2]->get_box($col3),
-                                             $self->{blocks}->[$block3]->get_box($col1),
-                                             $self->{blocks}->[$block3]->get_box($col2),
-                                             $self->{blocks}->[$block3]->get_box($col3)]);
+        my $horiz_obj = new shoriz(boxes => [$self->blocks()->[$block1]->get_box($col1),
+                                             $self->blocks()->[$block1]->get_box($col2),
+                                             $self->blocks()->[$block1]->get_box($col3),
+                                             $self->blocks()->[$block2]->get_box($col1),
+                                             $self->blocks()->[$block2]->get_box($col2),
+                                             $self->blocks()->[$block2]->get_box($col3),
+                                             $self->blocks()->[$block3]->get_box($col1),
+                                             $self->blocks()->[$block3]->get_box($col2),
+                                             $self->blocks()->[$block3]->get_box($col3)]);
         
-        push(@{$self->{horiz}}, $horiz_obj);
+        push(@{$self->horiz()}, $horiz_obj);
     }   
 }
 
 sub is_board_valid {
     my $self = shift;
     # look at all objects and see if they are valid
-    foreach (@{$self->{blocks}}, @{$self->{verts}}, @{$self->{horiz}}) {
+    foreach (@{$self->blocks()}, @{$self->verts()}, @{$self->horiz()}) {
         if (!$_->is_valid()) {
             return 0;
         }
@@ -148,7 +148,7 @@ sub is_board_valid {
 sub is_board_complete {
     my $self = shift;
     # look at all objects and see if they are complete
-    foreach (@{$self->{blocks}}, @{$self->{verts}}, @{$self->{horiz}}) {
+    foreach (@{$self->blocks()}, @{$self->verts()}, @{$self->horiz()}) {
         return 0 if (!$_->is_complete());
     }
 
@@ -192,7 +192,7 @@ sub get_mostly_populated_vert {
     my ($self, @bad_list) = @_;
     my $max_obj;
     my $max;
-  OUTER: foreach my $v (@{$self->{verts}}) {
+  OUTER: foreach my $v (@{$self->verts()}) {
         # skip this v if it is complete
         next if ($v->is_complete());
 
@@ -217,7 +217,7 @@ sub get_mostly_populated_horiz {
     my ($self, @bad_list) = @_;
     my $max_obj;
     my $max;
-  OUTER: foreach my $h (@{$self->{horiz}}) {
+  OUTER: foreach my $h (@{$self->horiz()}) {
         # skip this h if it is complete
         next if ($h->is_complete());
 
@@ -253,11 +253,10 @@ sub get_box_where_vert_and_horiz_intersect {
 sub find_solution {
     my $self = shift;
     
-    if ($self->{draw}) {
+    if ($self->draw()) {
 	system('clear');    
 	$self->print_board();
     }
-    #sleep 4;
 
     if ($self->is_board_valid() and $self->solve_it()) {
         $self->print_board();
@@ -284,14 +283,14 @@ sub solve_it {
     foreach (@valid_values) {
         $box->set($_);
 
-	if ($self->{draw}) {
+	if ($self->draw()) {
 	    $self->print_board();
 	    system('clear');
 	}
 
         # if the board is complete, then we are done
         if ($self->is_board_complete()) {
-            $self->{solutions}++;
+            $self->solutions($self->solutions() + 1);
             # return 2 
             return 1;
         } else {
@@ -330,18 +329,40 @@ sub solve_it {
 
 sub print_board {
     my $self = shift;
-    foreach my $h (@{$self->{horiz}}) {
+    
+    my $row = 0;
+    foreach my $h (@{$self->horiz()}) { 
+        # every three rows, print a buffer row
+        if ($row % 3 == 0) {
+            foreach (1..3) {
+                print "+" . "-" x 9;
+            }
+            print "+\n";            
+        }
+        $row++;
+
+        my $col = 0;
         foreach my $i (0..8) {
+            # every 3 columns needs a pipe
+            if ($col % 3 == 0) {
+                print "|";
+            }
+            $col++;
             my $v = $h->get_box($i)->get();
             if (!$v) {
-                print "  ";
+                print "   ";
             } else {
-                print $v . " ";
+                print " " . $v . " ";
             }
         }
-        print "\n";
+        # final bar
+        print "|\n";
     }
-    print "\n";
+    # final row buffer
+    foreach (1..3) {
+        print "+" . "-" x 9;
+    }
+    print "+\n";            
 }
 
 1;
