@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y perl
 RUN apt-get update && apt-get install -y cpanminus
 
 # GCC Make and stuff
-RUN apt-get install -y build-essential
-RUN apt-get install -y pkg-config
+RUN apt-get update && apt-get install -y build-essential
+RUN apt-get update && apt-get install -y pkg-config
 
 # Cleanup
 RUN apt-get purge
