@@ -7,20 +7,21 @@ To run the sudoker solver, first clone this repository and do:
 
 ```bash
 cd /path/to/sudoku_solver_clone
-perl /path/to/sudoku_solver_clone/sudoku.pl <GAME> <REDRAW>
+perl -Isrc/ src/sudoku.pl <GAME> <REDRAW> <FIRSTPASS>
 ```
 
-- \<GAME\> - a game package like: 'game::easy1', or 'game::bad'
-- \<REDRAW\> - if set to '1', will display the algorithm solving the puzzle in real time.
+- \<GAME\> - a game package located in the 'game/' folder. E.g. 'game::easy1' or 'game::bad'
+- \<REDRAW\> - if set to '1' or '0', will enable/disable redrawing the game board while solving the puzzle.
+- \<FIRSTPASS\> - if set to '1' or '0', will enable/disable the first pass algorithm. 
 
 To run inside a docker container, build the docker container defined by 'Dockerfile' and run it like so:
 
 ```bash
 cd /path/to/sudoku_solver_clone
 docker build -t sudoku_solver .
-docker run -it --rm -v /path/to/sudoku_solver_clone/:/sudoku sudoku_solver perl sudoku.pl <GAME> <REDRAW>
+docker run -it --rm <GAME> <REDRAW> <FIRSTPASS>
 ```
 
-To create a sudoku board, see the 'game' folder for examples on how to do it.
+To create a sudoku board, see the 'src/game' folder for examples on how to create one.
 
 Enjoy.
