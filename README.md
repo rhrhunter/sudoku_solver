@@ -19,7 +19,7 @@ To run inside a docker container, build the docker container defined by 'Dockerf
 ```bash
 cd /path/to/sudoku_solver_clone
 docker build -t sudoku_solver .
-docker run -it --rm <GAME> <REDRAW> <FIRSTPASS>
+docker run -it --rm sudoku_solver:latest <GAME> <REDRAW> <FIRSTPASS>
 ```
 
 To create a sudoku board, see the 'src/game' folder for examples on how to create one.
