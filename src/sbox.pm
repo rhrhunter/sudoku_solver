@@ -36,7 +36,7 @@ sub get_valid_values {
     foreach (@{$self->{owners}}) {
         push(@arrs, $_->get_valid_values());
     }
-    
+
     my @int;
 
     for (my $i = 0; $i < scalar(@arrs); $i++) {

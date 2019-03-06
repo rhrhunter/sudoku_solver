@@ -36,6 +36,11 @@ has draw => (
     is => "rw"
 );
 
+has do_first_pass => (
+    default => 1,
+    is => "rw"
+);
+
 sub define_board {
     my $self = shift;
     die ref($self) . " must implement 'define_board()'";
@@ -258,6 +263,13 @@ sub find_solution {
 	$self->print_board();
     }
 
+    # perform a simple first pass algorithm to find obvious answers    
+    use Time::HiRes qw(time);
+    my $stime_fp = time();
+    my $fp_boxes = $self->first_pass();
+    my $etime_fp = time() - $stime_fp;
+
+    my $stime = time();
     if ($self->is_board_valid() and $self->solve_it()) {
         $self->print_board();
 	my $solutions = $self->{solutions};
@@ -266,6 +278,42 @@ sub find_solution {
         $self->print_board();
         print "Impossibru, no solutions possible!\n"
     }
+    my $etime = time() - $stime;
+    print "Time Total: $etime\n";
+    print "Time First pass: $etime_fp\n";
+    print "First pass boxes filled: " . scalar(@{$fp_boxes}) . "\n";
+}
+
+sub first_pass {
+    my $self = shift;
+
+    return if (not $self->do_first_pass);
+
+    my $keep_trying = 1;
+    my $i = 0;
+    my $key = undef;
+
+    my @boxes = ();
+    
+  OUTER:
+    while ($keep_trying) {
+	$keep_trying = 0;
+	
+	foreach my $block (@{$self->blocks()}) {
+	    foreach my $box (@{$block->boxes}) {
+		last OUTER if ($key and $key eq $box);
+		next if ($box->get());
+		my @vals = $box->get_valid_values();
+		if (scalar(@vals) == 1) {		
+		    $box->set($vals[0]);
+		    push(@boxes, $box);
+		    $keep_trying = 1;
+		    $key = $box;
+		}
+	    }
+	}
+    }
+    return \@boxes;
 }
 
 sub solve_it {
@@ -291,27 +339,30 @@ sub solve_it {
         # if the board is complete, then we are done
         if ($self->is_board_complete()) {
             $self->solutions($self->solutions() + 1);
-            # return 2 
             return 1;
         } else {
             # the board is not complete yet
-            # solve the smaller puzzle
-            
+	    
+	    # run the first pass algorithm
+	    my $fp_boxes = $self->first_pass();
+	    
+            # solve the smaller puzzle            
             my $solved = $self->solve_it();
             if ($solved == 1) {
                 # we solved the smaller puzzle, which means that the value we chose
                 # for the current box is a good choice
                 # we are not done yet
                 return 1;
-            #} elsif ($solved == 2) {
-                # solving the smaller puzzle found a solution.
-                # unset the current box and keep searching for more solutions
-            #    $box->set(undef);
             } else {
                 # the smaller puzzle was not solveable,
                 # unset the value we chose and try a new value from the valid value
                 # list
                 $box->set(undef);
+		
+		# unset all fp_boxes because they are potentially all bad
+		foreach my $b (@{$fp_boxes}) {
+		    $b->set(undef);
+		}
             }
         }
     }

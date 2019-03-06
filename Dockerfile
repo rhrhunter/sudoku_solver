@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install -y pkg-config
 # Cleanup
 RUN apt-get purge
 
-# Create a directory
-RUN mkdir -p /sudoku
-
 # Install perl libs
 RUN cpanm --notest -i Moo
 
 # "cd" to that directory
 WORKDIR /sudoku
+
+COPY src /sudoku
+
+ENTRYPOINT ["/sudoku/sudoku.pl"]

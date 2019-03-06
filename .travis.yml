@@ -9,4 +9,7 @@ script:
  - . t/test1.sh
  - . t/test2.sh
  - . t/test3.sh
+ - . t/test4.sh
+ - . t/test5.sh
+ - . t/test6.sh
 

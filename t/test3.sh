@@ -1,3 +1,3 @@
 #!/bin/sh
 
-perl sudoku.pl game::empty 0
+perl src/sudoku.pl game::empty 0 1
